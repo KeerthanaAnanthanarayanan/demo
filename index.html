@@ -1,11 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ApexKicks | B2B Custom & Wholesale Footwear</title>
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --bg-light: #f8fafc;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #cbd5e1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+
+    /* Header & Nav */
+    header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
+    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+    .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+    .logo span { color: var(--accent); }
+    nav a { margin-left: 2rem; text-decoration: none; color: var(--text-dark); font-weight: 600; transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+
+    /* Blinking Campaign Banner */
+    .campaign-banner {
+      background: linear-gradient(90deg, #4c1d95 0%, #7c3aed 50%, #4c1d95 100%);
+      color: white;
+      padding: 0.85rem 1.5rem;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+    }
+
+    .blinking-badge {
+      background-color: #ef4444;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      animation: blink-glow 1.2s infinite alternate;
+    }
+
+    @keyframes blink-glow {
+      0% {
+        opacity: 1;
+        box-shadow: 0 0 4px #ef4444, 0 0 8px #ef4444;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0.3;
+        box-shadow: 0 0 0px transparent;
+        transform: scale(0.95);
+      }
+    }
+
+    .campaign-text { font-size: 0.95rem; font-weight: 600; }
+    .campaign-text span { color: #fde047; text-decoration: underline; }
+
+    .campaign-cta {
+      background-color: white;
+      color: #5b21b6;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .campaign-cta:hover { transform: scale(1.05); }
+
+    /* Hero Section */
+    .hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 4.5rem 2rem; text-align: center; }
+    .hero-content { max-width: 800px; margin: 0 auto; }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; font-weight: 800; }
+    .hero p { font-size: 1.2rem; color: #94a3b8; margin-bottom: 2rem; }
+    .btn-hero { display: inline-block; background-color: var(--accent); color: white; padding: 0.8rem 1.8rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: background 0.2s; }
+    .btn-hero:hover { background-color: var(--accent-hover); }
+
+    /* About Section */
+    .about-section { background: #ffffff; padding: 4rem 2rem; border-bottom: 1px solid #e2e8f0; }
+    .about-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .about-text h2 { font-size: 2.2rem; color: var(--primary); margin-bottom: 1rem; font-weight: 800; }
+    .about-text p { color: var(--text-muted); margin-bottom: 1.2rem; font-size: 1rem; line-height: 1.7; }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
+    .stat-card h3 { font-size: 1.8rem; color: var(--accent); font-weight: 800; }
+    .stat-card p { font-size: 0.85rem; color: var(--text-muted); margin: 0; font-weight: 600; }
+    .about-img { width: 100%; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); object-fit: cover; height: 380px; }
+
+    /* Product Showcase Grid */
+    .section { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
+    .section-title { text-align: center; font-size: 2rem; margin-bottom: 2.5rem; color: var(--primary); }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+    .product-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+    .product-img { width: 100%; height: 230px; object-fit: cover; display: block; }
+    .product-info { padding: 1.25rem; }
+    .product-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .product-sku { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .product-price { font-size: 1.05rem; font-weight: 600; color: var(--accent); }
+
+    /* Form Section */
+    .form-container { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 2.5rem; max-width: 750px; margin: 0 auto; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group label { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: var(--text-dark); }
+    
+    .form-group input, .form-group select { 
+      padding: 0.75rem; 
+      border: 1px solid var(--border-color); 
+      border-radius: 6px; 
+      font-size: 0.95rem; 
+      background-color: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus { 
+      outline: none; 
+      border-color: var(--accent); 
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); 
+    }
+    
+    .submit-btn { 
+      grid-column: span 2;
+      background-color: var(--accent); 
+      color: white; 
+      padding: 0.9rem; 
+      border: none; 
+      border-radius: 6px; 
+      font-size: 1rem; 
+      font-weight: 600; 
+      cursor: pointer; 
+      transition: background 0.2s; 
+      margin-top: 0.5rem;
+    }
+    .submit-btn:hover { background-color: var(--accent-hover); }
+
+    footer { background: var(--primary); color: #94a3b8; text-align: center; padding: 2rem; margin-top: 5rem; font-size: 0.9rem; }
+
+    @media (max-width: 850px) {
+      .about-container { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .submit-btn { grid-column: span 1; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to GIT!!</h1>
+
+  <header>
+    <div class="nav-container">
+      <div class="logo">Apex<span>Kicks</span></div>
+      <nav>
+        <a href="#about">About Us</a>
+        <a href="#products">Products</a>
+        <a href="#lead-form">Wholesale Enquiry</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="campaign-banner">
+    <span class="blinking-badge">LIVE CAMPAIGN</span>
+    <span class="campaign-text">🔥 Festive Wholesale Drive 2026: Get <span>15% OFF</span> bulk orders over 200 pairs!</span>
+    <a href="#lead-form" class="campaign-cta">Claim Offer</a>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Custom & Wholesale Athletic Footwear</h1>
+      <p>Premium performance gear built for high-volume retail distributors and team supply agreements.</p>
+      <a href="#lead-form" class="btn-hero">Request Wholesale Quote</a>
+    </div>
+  </section>
+
+  <section class="about-section" id="about">
+    <div class="about-container">
+      <div class="about-text">
+        <h2>Engineering High-Performance Footwear Since 2012</h2>
+        <p>
+          At ApexKicks, we specialize in high-volume athletic footwear manufacturing and B2B distribution across India and international markets. Our state-of-the-art facilities produce performance-tested running, training, and lifestyle sneakers designed to meet strict retail and sporting standards.
+        </p>
+        <p>
+          Partnering with enterprise retailers, sports chains, and team suppliers, we offer end-to-end supply chain integration, flexible MOQ tiers, and direct integration into modern ERP and CRM systems for seamless automated procurement.
+        </p>
+        <div class="about-stats">
+          <div class="stat-card">
+            <h3>14+</h3>
+            <p>Years of Excellence</p>
+          </div>
+          <div class="stat-card">
+            <h3>2.5M+</h3>
+            <p>Pairs Shipped</p>
+          </div>
+          <div class="stat-card">
+            <h3>120+</h3>
+            <p>Retail Partners</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <img class="about-img" src="https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=800&q=80" alt="ApexKicks Manufacturing Facility">
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="products">
+    <h2 class="section-title">Wholesale Catalog</h2>
+    <div class="product-grid">
+      
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80" alt="Apex Runner Pro">
+        <div class="product-info">
+          <div class="product-title">Apex Runner Pro</div>
+          <div class="product-sku">SKU: AKP-2026-RUN</div>
+          <div class="product-price">MRP: ₹3,999.00 / unit</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80" alt="Apex Stealth Streetwear">
+        <div class="product-info">
+          <div class="product-title">Apex Stealth Streetwear</div>
+          <div class="product-sku">SKU: AKP-2026-STR</div>
+          <div class="product-price">MRP: ₹4,999.00 / unit</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80" alt="Apex Trail Blazer">
+        <div class="product-info">
+          <div class="product-title">Apex Trail Blazer</div>
+          <div class="product-sku">SKU: AKP-2026-TRL</div>
+          <div class="product-price">MRP: ₹4,499.00 / unit</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=600&q=80" alt="Apex Air Court High">
+        <div class="product-info">
+          <div class="product-title">Apex Air Court High</div>
+          <div class="product-sku">SKU: AKP-2026-CRT</div>
+          <div class="product-price">MRP: ₹5,499.00 / unit</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=600&q=80" alt="Apex Marathon Lite">
+        <div class="product-info">
+          <div class="product-title">Apex Marathon Lite</div>
+          <div class="product-sku">SKU: AKP-2026-MAR</div>
+          <div class="product-price">MRP: ₹3,299.00 / unit</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&q=80" alt="Apex Retro Leather Classic">
+        <div class="product-info">
+          <div class="product-title">Apex Retro Leather Classic</div>
+          <div class="product-sku">SKU: AKP-2026-RTR</div>
+          <div class="product-price">MRP: ₹4,199.00 / unit</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=600&q=80" alt="Apex Speed Trainer">
+        <div class="product-info">
+          <div class="product-title">Apex Speed Trainer</div>
+          <div class="product-sku">SKU: AKP-2026-SPD</div>
+          <div class="product-price">MRP: ₹3,799.00 / unit</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?auto=format&fit=crop&w=600&q=80" alt="Apex Electric Blue Trainer">
+        <div class="product-info">
+          <div class="product-title">Apex Electric Blue Trainer</div>
+          <div class="product-sku">SKU: AKP-2026-ELC</div>
+          <div class="product-price">MRP: ₹4,799.00 / unit</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=600&q=80" alt="Apex Volt Lime Runner">
+        <div class="product-info">
+          <div class="product-title">Apex Volt Lime Runner</div>
+          <div class="product-sku">SKU: AKP-2026-VLT</div>
+          <div class="product-price">MRP: ₹4,299.00 / unit</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=600&q=80" alt="Apex Multi-Sport Casual">
+        <div class="product-info">
+          <div class="product-title">Apex Multi-Sport Casual</div>
+          <div class="product-sku">SKU: AKP-2026-MSP</div>
+          <div class="product-price">MRP: ₹2,999.00 / unit</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1579338559194-a162d19bf842?auto=format&fit=crop&w=600&q=80" alt="Apex Urban Low Canvas">
+        <div class="product-info">
+          <div class="product-title">Apex Urban Low Canvas</div>
+          <div class="product-sku">SKU: AKP-2026-URB</div>
+          <div class="product-price">MRP: ₹2,499.00 / unit</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&w=600&q=80" alt="Apex Shadow Phantom Edition">
+        <div class="product-info">
+          <div class="product-title">Apex Shadow Phantom Edition</div>
+          <div class="product-sku">SKU: AKP-2026-SHD</div>
+          <div class="product-price">MRP: ₹5,999.00 / unit</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1582588678413-dbf45f4823e9?auto=format&fit=crop&w=600&q=80" alt="Apex Cushion Glide">
+        <div class="product-info">
+          <div class="product-title">Apex Cushion Glide</div>
+          <div class="product-sku">SKU: AKP-2026-GLD</div>
+          <div class="product-price">MRP: ₹3,699.00 / unit</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="lead-form">
+    <div class="form-container">
+      <h2 style="margin-bottom: 0.5rem; text-align: center; color: var(--primary);">Bulk Purchase Enquiry</h2>
+      <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;">
+        Fill out your details below to submit an inquiry directly into our Sales Cloud system.
+      </p>
+
+      <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dfj00000UHLyA" method="POST">
+
+        <input type="hidden" name="oid" value="00Dfj00000UHLyA">
+        <input type="hidden" name="retURL" value="http://">
+        <input type="hidden" id="lead_source" name="lead_source" value="Festive Wholesale Campaign 2026" />
+
+        <div class="form-grid">
+          
+          <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input id="first_name" maxlength="40" name="first_name" size="20" type="text" placeholder="Keerthana" required />
+          </div>
+
+          <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input id="last_name" maxlength="80" name="last_name" size="20" type="text" placeholder="Ananth" required />
+          </div>
+
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input id="company" maxlength="40" name="company" size="20" type="text" placeholder="Apex Athletics Pvt Ltd" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" maxlength="80" name="email" size="20" type="email" placeholder="keerthana@apex.in" required />
+          </div>
+
+          <div class="form-group">
+            <label for="mobile">Mobile</label>
+            <input id="mobile" maxlength="40" name="mobile" size="20" type="tel" placeholder="+91 98765 43210" />
+          </div>
+
+          <div class="form-group">
+            <label for="city">City</label>
+            <input id="city" maxlength="40" name="city" size="20" type="text" placeholder="Chennai" />
+          </div>
+
+          <div class="form-group">
+            <label for="country_code">Country</label>
+            <select id="country_code" name="country_code">
+              <option value="IN" selected>India (IN)</option>
+              <option value="US">United States (US)</option>
+              <option value="CA">Canada (CA)</option>
+              <option value="GB">United Kingdom (GB)</option>
+              <option value="AU">Australia (AU)</option>
+              <option value="AE">United Arab Emirates (AE)</option>
+              <option value="SG">Singapore (SG)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="state_code">State / Province</label>
+            <select id="state_code" name="state_code">
+              <option value="">--Select State--</option>
+              <option value="TN" selected>Tamil Nadu (TN)</option>
+              <option value="KA">Karnataka (KA)</option>
+              <option value="MH">Maharashtra (MH)</option>
+              <option value="DL">Delhi (DL)</option>
+              <option value="TS">Telangana (TS)</option>
+              <option value="AP">Andhra Pradesh (AP)</option>
+              <option value="KL">Kerala (KL)</option>
+              <option value="GJ">Gujarat (GJ)</option>
+              <option value="WB">West Bengal (WB)</option>
+              <option value="UP">Uttar Pradesh (UP)</option>
+            </select>
+          </div>
+
+          <input type="submit" name="submit" value="Submit Inquiry & Claim Offer" class="submit-btn" />
+
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 ApexKicks Wholesale India Pvt Ltd. All rights reserved. Integrated with Salesforce Sales Cloud.</p>
+  </footer>
+
 </body>
 </html>
